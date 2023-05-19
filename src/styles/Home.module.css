@@ -6,7 +6,9 @@
   padding: 6rem;
   min-height: 100vh;
 }
-
+.main>li{
+  display: flex;
+}
 .description {
   display: inherit;
   justify-content: inherit;

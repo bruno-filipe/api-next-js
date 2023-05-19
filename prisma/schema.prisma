@@ -1,0 +1,72 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model TBEstado {
+  IDUF       String @id @db.VarChar(2)
+  NomeEstado String @db.VarChar(255)
+}
+
+model TBCidade {
+  IDCidade   Int    @id @default(autoincrement())
+  NomeCidade String @db.VarChar(255)
+  CodUF      String @db.VarChar(2)
+}
+
+model TBMercado {
+  IDMercado   Int    @id @default(autoincrement())
+  NomeMercado String @db.VarChar(255)
+  CodCidade   Int
+}
+
+model TBProduto {
+  IDProduto        Int    @id @default(autoincrement())
+  NomeProduto      String @db.VarChar(255)
+  DescricaoProduto String @db.VarChar(255)
+  Medida           String @db.VarChar(70)
+  FotoProduto      String @db.VarChar(255)
+  MarcaProduto     String @db.VarChar(70)
+  CodCategoria     Int
+}
+
+model TBPrecos {
+  IDPrecos     Int     @id @default(autoincrement())
+  PrecoProduto Decimal @db.Decimal(10, 2)
+  CodProduto   Int
+  Data         String  @db.VarChar(10)
+  CodMercado   Int
+}
+
+model TBCategoria {
+  IDCategoria   Int    @id @default(autoincrement())
+  NomeCategoria String @db.VarChar(255)
+}
+
+model da0b_4143_523c_b3d5_2acecd0262a4_20230517004803_vrepl {
+  IDProduto        Int    @id @default(autoincrement())
+  NomeProduto      String @db.VarChar(255)
+  DescricaoProduto String @db.VarChar(255)
+  Medida           String @db.VarChar(70)
+  FotoProduto      String @db.VarChar(255)
+  MarcaProduto     String @db.VarChar(70)
+
+  @@map("_0321da0b_4143_523c_b3d5_2acecd0262a4_20230517004803_vrepl")
+}
+
+model bd9d3_08f3_54f1_b934_714897c699f1_20230517003814_vrepl {
+  IDProduto        Int    @id @default(autoincrement())
+  NomeProduto      String @db.VarChar(255)
+  DescricaoProduto String @db.VarChar(255)
+  Medida           String @db.VarChar(70)
+  FotoProduto      String @db.VarChar(255)
+  MarcaProduto     String @db.VarChar(70)
+  CodCategoria     Int
+
+  @@map("_039bd9d3_08f3_54f1_b934_714897c699f1_20230517003814_vrepl")
+}
