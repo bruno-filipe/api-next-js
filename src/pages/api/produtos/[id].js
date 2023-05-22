@@ -1,3 +1,4 @@
+import { NextResponse } from 'next/server';
 import middleware from '../../../../middleware';
 import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient();
@@ -18,7 +19,7 @@ export default async function handler(req, res){
   if(req.method === 'GET'){
     if(idP == 0){
       const TBProduto = await prisma.TBProduto.findMany()
-      res.status(200).json({ TBProduto })
+      return NextResponse.json( TBProduto );
     }
     else if(idP > 0){
       const produto = await prisma.TBProduto.findUnique({
@@ -26,7 +27,7 @@ export default async function handler(req, res){
           IDProduto: idP,
         },
       })
-      res.status(200).json({ produto });
+      return NextResponse.json( produto );
     }
   }
 
@@ -122,11 +123,11 @@ export default async function handler(req, res){
   }*/
 }
 
-/*export const config = {
+export const config = {
   api: {
     bodyParser: false,
     externalResolver: true,
     // Add middleware to the middleware chain before the route handler
     beforeHandler: [middleware],
   },
-};*/
+};
