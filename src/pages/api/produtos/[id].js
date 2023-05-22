@@ -19,7 +19,7 @@ export default async function handler(req, res){
   if(req.method === 'GET'){
     if(idP == 0){
       const TBProduto = await prisma.TBProduto.findMany()
-      return NextResponse.json( TBProduto );
+      res.status(200).json({ TBProduto });
     }
     else if(idP > 0){
       const produto = await prisma.TBProduto.findUnique({
@@ -27,7 +27,7 @@ export default async function handler(req, res){
           IDProduto: idP,
         },
       })
-      return NextResponse.json({ produto }, { status: 200});
+      res.status(200).json({ produto })
     }
   }
 
