@@ -33,7 +33,7 @@ export default function Update(){
     fetch('/api/precos/'+idP, { headers: {'Content-Type': 'application/json'}, method: 'PUT', body: formJson })
     .then((response) => {
       if(response.ok){
-        alert('Preco atualizado')
+        alert('Preco atualizado');
         window.location.href="../crd/spreco";
       }
       else{

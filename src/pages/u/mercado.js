@@ -31,7 +31,7 @@ export default function Update(){
     fetch('/api/mercados/'+idP, { headers: {'Content-Type': 'application/json'}, method: 'PUT', body: formJson })
     .then((response) => {
       if(response.ok){
-        alert('Mercado atualizado')
+        alert('Mercado atualizado');
         window.location.href="../crd/mercados";
       }
       else{

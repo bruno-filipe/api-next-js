@@ -14,6 +14,7 @@ export default function Produtos(){
  
   var Estados = data.TBEstado;
   function criar(e){
+    e.preventDefault();
     const ID = document.getElementById("IDUF").value;
     const Nome = document.getElementById("NomeEstado").value;
     
@@ -23,7 +24,8 @@ export default function Produtos(){
     fetch('/api/estados/0', { headers: {'Content-Type': 'application/json'}, method: form.method, body: formJson })
     .then((response) => {
       if(response.ok){
-        alert('Estado adicionado')
+        alert('Estado adicionado');
+        location.reload();
       }
       else{
         alert('Falha ao adicionar o novo estado :/');

@@ -32,6 +32,7 @@ export default function Produtos(){
   var Mercados = data2.TBMercado;
 
   function criar(e){
+    e.preventDefault();
     const Preco = document.getElementById("PrecoProduto").value;
     const Data = document.getElementById("Data").value;
     const Mercado = document.getElementById("CodMercado").value;
@@ -42,7 +43,8 @@ export default function Produtos(){
     fetch('/api/precos/0', { headers: {'Content-Type': 'application/json'}, method: form.method, body: formJson })
     .then((response) => {
       if(response.ok){
-        alert('Preco adicionado')
+        alert('Preco adicionado');
+        location.reload();
       }
       else{
         e.preventDefault();

@@ -14,6 +14,7 @@ export default function Produtos(){
  
   var Cidades = data.TBCidade;
   function criar(e){
+    e.preventDefault();
     const Nome = document.getElementById("NomeCidade").value;
     const Cod = document.getElementById("CodUF").value;
     
@@ -23,7 +24,8 @@ export default function Produtos(){
     fetch('/api/cidades/0', { headers: {'Content-Type': 'application/json'}, method: form.method, body: formJson })
     .then((response) => {
       if(response.ok){
-        alert('Cidade adicionada')
+        alert('Cidade adicionada');
+        location.reload();
       }
       else{
         alert('Falha ao adicionar a nova cidade :/');

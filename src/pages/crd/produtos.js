@@ -44,7 +44,7 @@ export default function Produtos(){
     fetch('/api/produtos/0', { headers: {'Content-Type': 'application/json'}, method: form.method, body: formJson })
     .then((response) => {
       if(response.ok){
-        alert('Produto adicionado')
+        alert('Produto adicionado');
         location.reload();
       }
       else{
@@ -71,7 +71,7 @@ export default function Produtos(){
         <ul>{
           Produtos?.map(produto =>
               <li key={produto.IDProduto}>
-                <img className='imagem' src='${produto.FotoProduto}' alt='Foto do Produto'></img>
+                <img className='imagem' src={produto.FotoProduto} alt='Foto do Produto'></img>
                 <div className='texto'>
                   <h2>
                     <b>{produto.NomeProduto}</b>{' ' + produto.MarcaProduto}

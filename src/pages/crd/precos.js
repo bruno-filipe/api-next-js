@@ -23,7 +23,7 @@ export default function Produtos(){
         <ul>{
           Produtos?.map(produto =>
               <li key={produto.IDProduto}>
-                <img className='imagem' src='${produto.FotoProduto}' alt='Foto do Produto'></img>
+                <img className='imagem' src={produto.FotoProduto} alt='Foto do Produto'></img>
                 <div className='texto'>
                   <h2>
                     <b>{produto.NomeProduto}</b>{' ' + produto.MarcaProduto}

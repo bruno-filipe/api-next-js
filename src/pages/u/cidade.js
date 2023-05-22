@@ -18,7 +18,7 @@ export default function Update(){
     fetch('/api/cidades/'+idP, { headers: {'Content-Type': 'application/json'}, method: 'PUT', body: formJson })
     .then((response) => {
       if(response.ok){
-        alert('Cidade atualizada')
+        alert('Cidade atualizada');
         window.location.href="../crd/cidades";
       }
       else{

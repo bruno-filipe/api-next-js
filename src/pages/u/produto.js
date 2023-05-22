@@ -35,7 +35,7 @@ export default function Update(){
     fetch(`/api/produtos/${idP}`, { headers: { 'Content-Type': 'application/json' }, method: 'PUT', body: formJson })
     .then((response) => {
       if(response.ok){
-        alert('Produto atualizado')
+        alert('Produto atualizado');
         window.location.href="../crd/produtos";
       }
       else{

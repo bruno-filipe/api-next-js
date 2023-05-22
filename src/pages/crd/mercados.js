@@ -32,6 +32,7 @@ export default function Produtos(){
     return re;
   }
   function criar(e){
+    e.preventDefault();
     const Cod = document.getElementById("CodCidade").value;
     const Nome = document.getElementById("NomeMercado").value;
     
@@ -41,7 +42,8 @@ export default function Produtos(){
     fetch('/api/mercados/0', { headers: {'Content-Type': 'application/json'}, method: form.method, body: formJson })
     .then((response) => {
       if(response.ok){
-        alert('Mercado adicionado')
+        alert('Mercado adicionado');
+        location.reload();
       }
       else{
         alert('Falha ao adicionar o novo mercado :/');

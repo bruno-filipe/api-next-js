@@ -1,3 +1,4 @@
+import middleware from '../../../../middleware';
 import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient();
 
@@ -87,3 +88,12 @@ export default async function handler(req, res){
         res.status(200).json({ data: deleteMercado.IDMercado })
     }
 }
+
+export const config = {
+  api: {
+    bodyParser: false,
+    externalResolver: true,
+    // Add middleware to the middleware chain before the route handler
+    beforeHandler: [middleware],
+  },
+};
