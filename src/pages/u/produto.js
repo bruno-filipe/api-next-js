@@ -36,7 +36,7 @@ export default function Update(){
     .then((response) => {
       if(response.ok){
         alert('Produto atualizado')
-        window.location.href="../u/produtos";
+        window.location.href="../crd/produtos";
       }
       else{
         alert('Falha ao atualizar o produto :/')
