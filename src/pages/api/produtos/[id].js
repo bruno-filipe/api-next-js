@@ -1,5 +1,4 @@
-import { NextResponse } from 'next/server';
-import middleware from '../../../../middleware';
+import Allow from '../../../../middleware';
 import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient();
 
@@ -10,7 +9,7 @@ function isNullOrEmpty(valor){
   else{ return false; }
 }
 
-export default async function handler(req, res){
+const handler = async (req, res) => {
   //pegando id da URL, passando p/ int p/ ser usado em qualquer função do CRUD 
   const r = req.query;
   const idP = parseInt(r.id);
@@ -123,11 +122,4 @@ export default async function handler(req, res){
   }*/
 }
 
-export const config = {
-  api: {
-    bodyParser: false,
-    externalResolver: true,
-    // Add middleware to the middleware chain before the route handler
-    beforeHandler: [middleware],
-  },
-};
+export default Allow(handler);
