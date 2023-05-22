@@ -122,11 +122,11 @@ export default async function handler(req, res){
   }*/
 }
 
-export const config = {
+/*export const config = {
   api: {
     bodyParser: false,
     externalResolver: true,
     // Add middleware to the middleware chain before the route handler
     beforeHandler: [middleware],
   },
-};
+};*/
