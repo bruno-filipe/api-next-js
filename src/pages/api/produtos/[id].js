@@ -27,7 +27,7 @@ export default async function handler(req, res){
           IDProduto: idP,
         },
       })
-      return NextResponse.json( produto );
+      return NextResponse.json({ produto }, { status: 200});
     }
   }
 
