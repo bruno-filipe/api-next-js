@@ -31,6 +31,7 @@ export default function Produtos(){
   var Categorias = data2.TBCategoria;
 
   function criar(e){
+    e.preventDefault();
     const select = document.getElementById("Categoria").value;
     const Nome = document.getElementById("NomeProduto").value;
     const Desc = document.getElementById("DescricaoProduto").value;
@@ -44,6 +45,7 @@ export default function Produtos(){
     .then((response) => {
       if(response.ok){
         alert('Produto adicionado')
+        location.reload();
       }
       else{
         alert('Falha ao adicionar o novo produto :/');
