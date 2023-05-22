@@ -1,8 +1,7 @@
 import { NextResponse } from "next/server";
 
 export function middleware(req){
-    const origin = req.headers.get('orgin');
-    console.log(origin);
+    const origin = req.headers.get('origin');
 
     const res = NextResponse.next();
     res.headers.set("Access-Control-Allow-Origin", "*");
@@ -10,9 +9,9 @@ export function middleware(req){
     res.headers.set("Access-Control-Allow-Headers", "Content-Type, Authorization");
     res.headers.set("Access-Control-Max-Age", "86400");
 
-    console.log("Middleware!");
-    console.log(req.method);
-    console.log(req.url);
+    /*if(req.method === 'OPTIONS'){
+        return NextResponse.ok('');
+    }*/
 
     return res;
 }
