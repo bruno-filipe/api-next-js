@@ -48,25 +48,29 @@ model TBCategoria {
   NomeCategoria String @db.VarChar(255)
 }
 
-model da0b_4143_523c_b3d5_2acecd0262a4_20230517004803_vrepl {
-  IDProduto        Int    @id @default(autoincrement())
-  NomeProduto      String @db.VarChar(255)
-  DescricaoProduto String @db.VarChar(255)
-  Medida           String @db.VarChar(70)
-  FotoProduto      String @db.VarChar(255)
-  MarcaProduto     String @db.VarChar(70)
-
-  @@map("_0321da0b_4143_523c_b3d5_2acecd0262a4_20230517004803_vrepl")
+model TBLista {
+  IDLista    Int    @id @default(autoincrement())
+  CodUsuario Int
+  Nome       String @db.VarChar(256)
 }
 
-model bd9d3_08f3_54f1_b934_714897c699f1_20230517003814_vrepl {
-  IDProduto        Int    @id @default(autoincrement())
-  NomeProduto      String @db.VarChar(255)
-  DescricaoProduto String @db.VarChar(255)
-  Medida           String @db.VarChar(70)
-  FotoProduto      String @db.VarChar(255)
-  MarcaProduto     String @db.VarChar(70)
-  CodCategoria     Int
+model TBListaProduto {
+  CodLista   Int @id
+  CodProduto Int
+  CodPreco   Int
+}
 
-  @@map("_039bd9d3_08f3_54f1_b934_714897c699f1_20230517003814_vrepl")
+model TBUsuario {
+  IDUsuario Int     @id @default(autoincrement())
+  Nome      String? @db.VarChar(256)
+  Senha     String? @db.VarChar(256)
+  Email     String? @db.VarChar(256)
+  apiKey    String  @db.VarChar(256)
+}
+
+model c69_a2ba_5778_bbc0_420c6361c0e6_20230601131430_vrepl {
+  IDLista    Int @id @default(autoincrement())
+  CodUsuario Int
+
+  @@map("_39646c69_a2ba_5778_bbc0_420c6361c0e6_20230601131430_vrepl")
 }
