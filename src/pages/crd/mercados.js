@@ -5,7 +5,7 @@ export default function Produtos(){
   const [data, setData] = useState([]);
   
   useEffect(() => {
-    fetch('/api/mercados/0', { method: 'GET'})
+    fetch('/api/mercados/0', { method: 'GET', headers: {'id':'4', 'tk':'7cea26600c288a7055229a1d7e9ba49b'}})
       .then((res) => res.json())
       .then((data) => {
         setData(data);
@@ -18,7 +18,7 @@ export default function Produtos(){
   const [data2, setData2] = useState([]);
     
   useEffect(() => {
-      fetch('/api/cidades/0', { method: 'GET'})
+      fetch('/api/cidades/0', { method: 'GET', headers: {'id':'4', 'tk':'7cea26600c288a7055229a1d7e9ba49b'}})
       .then((res) => res.json())
       .then((data2) => {
           setData2(data2);
@@ -39,7 +39,7 @@ export default function Produtos(){
     const form = e.target;
     const obj = {CodCidade: Cod, NomeMercado: Nome};
     const formJson = JSON.stringify(obj);
-    fetch('/api/mercados/0', { headers: {'Content-Type': 'application/json'}, method: form.method, body: formJson })
+    fetch('/api/mercados/0', { headers: {'Content-Type': 'application/json', 'id':'4', 'tk':'7cea26600c288a7055229a1d7e9ba49b'}, method: form.method, body: formJson })
     .then((response) => {
       if(response.ok){
         alert('Mercado adicionado');
@@ -53,7 +53,7 @@ export default function Produtos(){
 
   const apagar = async idP =>{
     if (confirm("Deseja apagar o mercado "+idP+" ?") == true) {
-      const response = await fetch(`/api/mercados/${idP}`, { method: 'DELETE' });
+      const response = await fetch(`/api/mercados/${idP}`, { method: 'DELETE', headers: {'id':'4', 'tk':'7cea26600c288a7055229a1d7e9ba49b'} });
       const data = await response.json();
       alert(`Mercado com ID: ${data.data} excluído com sucesso!`);
       location.reload();

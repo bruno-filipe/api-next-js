@@ -5,7 +5,7 @@ export default function Produtos(){
   const [data, setData] = useState([]);
  
   useEffect(() => {
-    fetch('/api/produtos/0', { method: 'GET'})
+    fetch('/api/produtos/0', { method: 'GET', headers: {'id':'4', 'tk':'7cea26600c288a7055229a1d7e9ba49b'}})
       .then((res) => res.json())
       .then((data) => {
         setData(data);

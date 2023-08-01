@@ -5,7 +5,7 @@ export default function Produtos(){
   const [data, setData] = useState([]);
   
   useEffect(() => {
-    fetch('/api/cidades/0', { method: 'GET'})
+    fetch('/api/cidades/0', { method: 'GET', headers: { 'id':'4', 'tk':'7cea26600c288a7055229a1d7e9ba49b' } } )
       .then((res) => res.json())
       .then((data) => {
         setData(data);
@@ -21,7 +21,7 @@ export default function Produtos(){
     const form = e.target;
     const obj = {CodUF: Cod, NomeCidade: Nome};
     const formJson = JSON.stringify(obj);
-    fetch('/api/cidades/0', { headers: {'Content-Type': 'application/json'}, method: form.method, body: formJson })
+    fetch('/api/cidades/0', { method: form.method, body: formJson, headers: {'Content-Type': 'application/json', 'id':'4', 'tk':'7cea26600c288a7055229a1d7e9ba49b' } }) 
     .then((response) => {
       if(response.ok){
         alert('Cidade adicionada');
@@ -35,7 +35,7 @@ export default function Produtos(){
 
   const apagar = async idP =>{
     if (confirm("Deseja apagar a cidade "+idP+" ?") == true) {
-      const response = await fetch(`/api/cidades/${idP}`, { method: 'DELETE' });
+      const response = await fetch(`/api/cidades/${idP}`, { method: 'DELETE', headers: { 'id':'4', 'tk':'7cea26600c288a7055229a1d7e9ba49b' } } );
       const data = await response.json();
       alert(`Cidade com ID: ${data.data} excluída com sucesso!`);
       location.reload();

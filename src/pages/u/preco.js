@@ -6,7 +6,7 @@ export default function Update(){
     const [data2, setData2] = useState([]);
  
     useEffect(() => {
-      fetch('/api/mercados/0', { method: 'GET'})
+      fetch('/api/mercados/0', { headers: {'id':'4', 'tk':'7cea26600c288a7055229a1d7e9ba49b'}, method: 'GET'})
         .then((res) => res.json())
         .then((data2) => {
           setData2(data2);
@@ -30,7 +30,7 @@ export default function Update(){
     const form = e.target;
     const obj = {PrecoProduto: Preco, CodProduto: data.CodProduto, Data: Data, CodMercado: Mercado};
     const formJson = JSON.stringify(obj);
-    fetch('/api/precos/'+idP, { headers: {'Content-Type': 'application/json'}, method: 'PUT', body: formJson })
+    fetch('/api/precos/'+idP, { headers: {'Content-Type': 'application/json', 'id':'4', 'tk':'7cea26600c288a7055229a1d7e9ba49b'}, method: 'PUT', body: formJson })
     .then((response) => {
       if(response.ok){
         alert('Preco atualizado');

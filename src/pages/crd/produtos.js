@@ -2,12 +2,13 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 export default function Produtos(){
+  //pega produtos pra exibit na lista em cima
   const [data, setData] = useState([]);
   const [isLoading, setLoading] = useState(false);
- 
+  
   useEffect(() => {
     setLoading(true);
-    fetch('/api/produtos/0', { method: 'GET'})
+    fetch('/api/produtos/0', { headers: {'id':'4', 'tk':'7cea26600c288a7055229a1d7e9ba49b'}, method: 'GET'})
       .then((res) => res.json())
       .then((data) => {
         setData(data);
@@ -17,11 +18,11 @@ export default function Produtos(){
  
   var Produtos = data.TBProduto;
 
-
+  //pega categorias para o select do form lá embaixo
   const [data2, setData2] = useState([]);
  
   useEffect(() => {
-    fetch('/api/categorias/0', { method: 'GET'})
+    fetch('/api/categorias/0', { headers: {'id':'4', 'tk':'7cea26600c288a7055229a1d7e9ba49b'}, method: 'GET'})
       .then((res) => res.json())
       .then((data2) => {
         setData2(data2);
@@ -41,7 +42,7 @@ export default function Produtos(){
     const form = e.target;
     const obj = {NomeProduto: Nome, DescricaoProduto: Desc, Medida: Medida, MarcaProduto: Marca, Categoria: select};
     const formJson = JSON.stringify(obj);
-    fetch('/api/produtos/0', { headers: {'Content-Type': 'application/json'}, method: form.method, body: formJson })
+    fetch('/api/produtos/0', { headers: {'Content-Type': 'application/json', 'id':'4', 'tk':'7cea26600c288a7055229a1d7e9ba49b'}, method: form.method, body: formJson })
     .then((response) => {
       if(response.ok){
         alert('Produto adicionado');
@@ -55,7 +56,7 @@ export default function Produtos(){
 
   const apagar = async idP =>{
     if (confirm("Deseja apagar o produto "+idP+" ?") == true) {
-      const response = await fetch(`/api/produtos/${idP}`, { method: 'DELETE' });
+      const response = await fetch(`/api/produtos/${idP}`, { headers: {'id':'4', 'tk':'7cea26600c288a7055229a1d7e9ba49b'}, method: 'DELETE'});
       const data = await response.json();
       alert(`Produto com ID: ${data.data} excluído com sucesso!`);
       location.reload();

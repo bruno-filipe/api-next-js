@@ -7,7 +7,7 @@ export default function Update(){
   const [data2, setData2] = useState([]);
  
   useEffect(() => {
-    fetch('/api/categorias/0', { method: 'GET'})
+    fetch('/api/categorias/0', { headers: {'id':'4', 'tk':'7cea26600c288a7055229a1d7e9ba49b'}, method: 'GET'})
       .then((res) => res.json())
       .then((data2) => {
         setData2(data2);
@@ -32,7 +32,7 @@ export default function Update(){
 
     const obj = {NomeProduto: Nome, DescricaoProduto: Desc, Medida: Medida, MarcaProduto: Marca, Categoria: select};
     const formJson = JSON.stringify(obj);
-    fetch(`/api/produtos/${idP}`, { headers: { 'Content-Type': 'application/json' }, method: 'PUT', body: formJson })
+    fetch(`/api/produtos/${idP}`, { headers: { 'Content-Type': 'application/json', 'id':'4', 'tk':'7cea26600c288a7055229a1d7e9ba49b'}, method: 'PUT', body: formJson })
     .then((response) => {
       if(response.ok){
         alert('Produto atualizado');
