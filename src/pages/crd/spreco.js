@@ -15,8 +15,9 @@ export default function Produtos(){
         setData(data);
       });
   }, []);
- 
-  var Precos = data.TBPrecos;
+  var Precos = data.HistoricoPrecos;
+  console.log(idP);
+  console.log(Precos);
 
 
   const [data2, setData2] = useState([]);

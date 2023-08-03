@@ -1,6 +1,6 @@
 async function verificarTokens(id, token){
     let f;
-    await fetch('http:localhost:3000/api/usuarios/'+id, { method: 'GET', headers: { 'id':'vt', 'tk':'7cea26600c288a7055229a1d7e9ba49b'} } )
+    await fetch('http://api-next-js-bruno-filipe.vercel.app/api/usuarios/'+id, { method: 'GET', headers: { 'id':'vt', 'tk':'7cea26600c288a7055229a1d7e9ba49b'} } )
         .then(response => response.json())
         .then(data => {
             if(data.Usuario.apiKey.trim() === token.trim()){
@@ -24,7 +24,7 @@ const Allow = (handler) => async (req, res) => {
     //primeira verificação pra ver se é a função verificationToken
 
     if(id === 'vt'){
-        if(token === '7cea26600c288a7055229a1d7e9ba49b' && origin === 'localhost:3000'){
+        if(token === '7cea26600c288a7055229a1d7e9ba49b' && origin === 'api-next-js-bruno-filipe.vercel.app'){
             res.setHeader("Access-Control-Allow-Origin", origin);
             res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
             res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
@@ -43,6 +43,7 @@ const Allow = (handler) => async (req, res) => {
     }
     else{
 
+    var i = 0;
     const whiteList = ['localhost:3000', 'api-next-js-bruno-filipe.vercel.app'];
     whiteList.forEach(async function(o) {
         if(origin === o){
@@ -65,6 +66,10 @@ const Allow = (handler) => async (req, res) => {
             }
         }
         else{
+            i++;
+        }
+
+        if(i == 2){
             console.log("acesso negado 2");
         }
         if(req.method === 'OPTIONS'){

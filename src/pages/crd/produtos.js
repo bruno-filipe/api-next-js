@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 export default function Produtos(){
-  //pega produtos pra exibit na lista em cima
+  //pega produtos pra exibit na lista
   const [data, setData] = useState([]);
   const [isLoading, setLoading] = useState(false);
   
