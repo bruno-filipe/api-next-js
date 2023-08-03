@@ -44,7 +44,7 @@ const Allow = (handler) => async (req, res) => {
     else{
 
     var i = 0;
-    const whiteList = ['localhost:3000', 'api-next-js-bruno-filipe.vercel.app'];
+    const whiteList = ['localhost:3000', 'api-next-js-bruno-filipe.vercel.app', 'api-next-js-five.vercel.app'];
     whiteList.forEach(async function(o) {
         if(origin === o){
             const d = await verificarTokens(id, token);
@@ -69,7 +69,7 @@ const Allow = (handler) => async (req, res) => {
             i++;
         }
 
-        if(i == 2){
+        if(i == 3){
             console.log("acesso negado 2");
         }
         if(req.method === 'OPTIONS'){
