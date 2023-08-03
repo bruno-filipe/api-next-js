@@ -23,6 +23,7 @@ const Allow = (handler) => async (req, res) => {
     console.log(origin)
     //primeira verificação pra ver se é a função verificationToken
 
+//né possível véi
     if(id === 'vt'){
         if(token === '7cea26600c288a7055229a1d7e9ba49b' && origin === 'api-next-js-bruno-filipe.vercel.app'){
             res.setHeader("Access-Control-Allow-Origin", origin);
