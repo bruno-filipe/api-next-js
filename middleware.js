@@ -15,6 +15,7 @@ async function verificarTokens(id, token){
 }
 
 const Allow = (handler) => async (req, res) => {
+    console.log(req.headers);
     const token = req.headers['tk'];
     console.log(token)
     const id = req.headers['id'];
