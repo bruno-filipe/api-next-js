@@ -46,7 +46,7 @@ const Allow = (handler) => async (req, res) => {
     else{
 
     var i = 0;
-    const whiteList = ['localhost:3000', 'localhost:8100', 'api-next-js-bruno-filipe.vercel.app', 'api-next-js-five.vercel.app'];
+    const whiteList = ['localhost:3000', 'http://localhost:8100', 'api-next-js-bruno-filipe.vercel.app', 'api-next-js-five.vercel.app'];
     whiteList.forEach(async function(o) {
         if(origin === o){
             const d = await verificarTokens(id, token);
