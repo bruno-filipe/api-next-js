@@ -18,6 +18,12 @@ async function verificarTokens(id, token) {
   return f;
 }
 
+const express = require('express');
+const cors = require('cors');
+
+//const app = express();
+
+
 const Allow = (handler) => async (req, res) => {
   console.log(req.headers);
   const token = req.headers['tk'];
@@ -87,5 +93,12 @@ const Allow = (handler) => async (req, res) => {
 
   }
 }
+
+// Configurar CORS para permitir todas as origens
+Allow.use(cors());
+
+// Lidar com solicitações de opções (pré-voo)
+Allow.options('*', cors());
+
 
 export default Allow;
