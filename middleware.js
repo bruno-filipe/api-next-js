@@ -82,7 +82,7 @@ const Allow = (handler) => async (req, res) => {
               i++;
             }
     
-            if (i == 3) {
+            if (i == 4) {
               console.log("acesso negado 2");
             }
           });
