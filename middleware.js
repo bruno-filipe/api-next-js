@@ -30,7 +30,7 @@ const Allow = (handler) => async (req, res) => {
   if (req.method === 'OPTIONS') {
     res.setHeader("Access-Control-Allow-Origin", origin);
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, tk, id");
     res.setHeader("Access-Control-Max-Age", "86400");
     res.status(200).end();
     return;
@@ -40,7 +40,7 @@ const Allow = (handler) => async (req, res) => {
       if (token === '7cea26600c288a7055229a1d7e9ba49b' && origin === 'https://api-next-js-bruno-filipe.vercel.app') {
         res.setHeader("Access-Control-Allow-Origin", origin);
         res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-        res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+        res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, tk, id");
         res.setHeader("Access-Control-Max-Age", "86400");
         console.log("acesso liberado")
         return handler(req, res);
@@ -61,7 +61,7 @@ const Allow = (handler) => async (req, res) => {
           if (d === true) {
             res.setHeader("Access-Control-Allow-Origin", origin);
             res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-            res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+            res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, tk, id");
             res.setHeader("Access-Control-Max-Age", "86400");
             console.log("acesso liberado")
             return handler(req, res);
