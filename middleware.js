@@ -18,12 +18,6 @@ async function verificarTokens(id, token) {
   return f;
 }
 
-const express = require('express');
-const cors = require('cors');
-
-//const app = express();
-
-
 const Allow = (handler) => async (req, res) => {
   console.log(req.headers);
   const token = req.headers['tk'];
@@ -33,72 +27,63 @@ const Allow = (handler) => async (req, res) => {
   const origin = req.headers.origin; // Alterado para req.headers.origin
   console.log(origin)
 
-  if (id === 'vt') {
-    if (token === '7cea26600c288a7055229a1d7e9ba49b' && origin === 'https://api-next-js-bruno-filipe.vercel.app') {
-      res.setHeader("Access-Control-Allow-Origin", origin);
-      res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-      res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-      res.setHeader("Access-Control-Max-Age", "86400");
-      console.log("acesso liberado")
-      return handler(req, res);
-    } else {
-      res.setHeader("Access-Control-Allow-Origin", origin);
-      res.setHeader("Access-Control-Allow-Methods");
-      res.setHeader("Access-Control-Allow-Headers");
-      res.setHeader("Access-Control-Max-Age", "86400");
-      console.log("acesso negado 1")
-      return;
-    }
-  } else {
-
-    if (req.method === 'OPTIONS') {
+  if (req.method === 'OPTIONS') {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+    res.setHeader("Access-Control-Max-Age", "86400");
+    res.status(200).end();
+    return;
+  }
+  else{
+    if (id === 'vt') {
+      if (token === '7cea26600c288a7055229a1d7e9ba49b' && origin === 'https://api-next-js-bruno-filipe.vercel.app') {
         res.setHeader("Access-Control-Allow-Origin", origin);
         res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
         res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
         res.setHeader("Access-Control-Max-Age", "86400");
-        res.status(200).end();
+        console.log("acesso liberado")
+        return handler(req, res);
+      } else {
+        res.setHeader("Access-Control-Allow-Origin", origin);
+        res.setHeader("Access-Control-Allow-Methods");
+        res.setHeader("Access-Control-Allow-Headers");
+        res.setHeader("Access-Control-Max-Age", "86400");
+        console.log("acesso negado 1")
         return;
-    }
-    else{
-        var i = 0;
-        const whiteList = ['http://localhost:3000', 'http://localhost:8100', 'https://api-next-js-bruno-filipe.vercel.app', 'https://api-next-js-five.vercel.app']; // Incluí "https://" nas URLs
-        whiteList.forEach(async function(o) {
-          if (origin === o) {
-            const d = await verificarTokens(id, token);
-            if (d === true) {
-              res.setHeader("Access-Control-Allow-Origin", origin);
-              res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-              res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-              res.setHeader("Access-Control-Max-Age", "86400");
-              console.log("acesso liberado")
-              return handler(req, res);
-            } else {
-              res.setHeader("Access-Control-Allow-Origin", origin);
-              res.setHeader("Access-Control-Allow-Methods");
-              res.setHeader("Access-Control-Allow-Headers");
-              res.setHeader("Access-Control-Max-Age", "86400");
-              console.log("acesso negado 1")
-              return;
-            }
+      }
+    } else {
+      var i = 0;
+      const whiteList = ['http://localhost:3000', 'http://localhost:8100', 'https://api-next-js-bruno-filipe.vercel.app', 'https://api-next-js-five.vercel.app']; // Incluí "https://" nas URLs
+      whiteList.forEach(async function(o) {
+        if (origin === o) {
+          const d = await verificarTokens(id, token);
+          if (d === true) {
+            res.setHeader("Access-Control-Allow-Origin", origin);
+            res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+            res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+            res.setHeader("Access-Control-Max-Age", "86400");
+            console.log("acesso liberado")
+            return handler(req, res);
           } else {
-            i++;
+            res.setHeader("Access-Control-Allow-Origin", origin);
+            res.setHeader("Access-Control-Allow-Methods");
+            res.setHeader("Access-Control-Allow-Headers");
+            res.setHeader("Access-Control-Max-Age", "86400");
+            console.log("acesso negado 1")
+            return;
           }
-    
-          if (i == 3) {
-            console.log("acesso negado 2");
-          }
-      
-        });        
+        } else {
+          i++;
+        }
+
+        if (i == 3) {
+          console.log("acesso negado 2");
+        }
+      }); 
     }
-
   }
+
 }
-
-// Configurar CORS para permitir todas as origens
-Allow.use(cors());
-
-// Lidar com solicitações de opções (pré-voo)
-Allow.options('*', cors());
-
 
 export default Allow;
