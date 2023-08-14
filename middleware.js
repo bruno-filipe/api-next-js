@@ -56,6 +56,8 @@ const Allow = (handler) => async (req, res) => {
         var i = 0;
           const whiteList = ['http://localhost:3000', 'http://localhost:8100', 'https://api-next-js-bruno-filipe.vercel.app', 'https://api-next-js-five.vercel.app']; // Incluí "https://" nas URLs
           whiteList.forEach(async function(o) {
+            console.log(o);
+            console.log(origin);
             if (origin === o) {
               const d = await verificarTokens(id, token);
               if (d === true) {
@@ -74,6 +76,9 @@ const Allow = (handler) => async (req, res) => {
                 return;
               }
             } else {
+              console.log(o);
+              console.log(origin);
+              console.log("deu ruim :/");
               i++;
             }
     
