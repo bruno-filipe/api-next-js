@@ -58,6 +58,7 @@ const Allow = (handler) => async (req, res) => {
           whiteList.forEach(async function(o) {
             console.log(o);
             console.log("deu certo");
+            //cacilda
             if (origin === o) {
               const d = await verificarTokens(id, token);
               if (d === true) {
