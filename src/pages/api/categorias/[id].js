@@ -18,7 +18,7 @@ const handler = async (req, res) => {
   if(req.method === 'GET'){
     if(idP == 0){
       const TBCategoria = await prisma.TBCategoria.findMany()
-      res.status(200).json({ TBCategoria })
+      res.status(200).json( TBCategoria )
     }
     else if(idP > 0){
       const categoria = await prisma.TBCategoria.findUnique({
@@ -26,7 +26,7 @@ const handler = async (req, res) => {
           IDCategoria: idP,
         },
       })
-      res.status(200).json({ categoria });
+      res.status(200).json( categoria );
     }
   }
 
