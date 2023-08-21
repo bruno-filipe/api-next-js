@@ -19,7 +19,6 @@ async function verificarTokens(id, token) {
 }
 
 const Allow = (handler) => async (req, res) => {
-  console.log(req.headers);
   const token = req.headers['tk'];
   console.log(token)
   const id = req.headers['id'];
@@ -40,7 +39,7 @@ const Allow = (handler) => async (req, res) => {
         res.setHeader("Access-Control-Allow-Methods");
         res.setHeader("Access-Control-Allow-Headers");
         res.setHeader("Access-Control-Max-Age", "86400");
-        console.log("acesso negado 1")
+        console.log("invalid token or origin")
         return;
       }
     } else {
@@ -53,40 +52,42 @@ const Allow = (handler) => async (req, res) => {
         return;
       }
       else{
-        var i = 0;
-          const whiteList = ['http://localhost:3000', 'http://localhost:8100', 'https://api-next-js-bruno-filipe.vercel.app', 'https://api-next-js-five.vercel.app']; // Incluí "https://" nas URLs
-          whiteList.forEach(async function(o) {
-            console.log(o);
-            console.log("deu certo");
-            //cacilda
-            if (origin === o) {
-              const d = await verificarTokens(id, token);
-              if (d === true) {
-                res.setHeader("Access-Control-Allow-Origin", origin);
-                res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-                res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, tk, id");
-                res.setHeader("Access-Control-Max-Age", "86400");
-                console.log("acesso liberado")
-                return handler(req, res);
-              } else {
-                res.setHeader("Access-Control-Allow-Origin", origin);
-                res.setHeader("Access-Control-Allow-Methods");
-                res.setHeader("Access-Control-Allow-Headers");
-                res.setHeader("Access-Control-Max-Age", "86400");
-                console.log("acesso negado 1")
-                return;
-              }
-            } else {
-              console.log("deu ruim :/");
-              i++;
-            }
-    
-            if (i == 4) {
-              console.log("acesso negado 2");
-            }
-          });
-      }       
-    }
+        const whiteList = ['http://localhost:3000',
+        'https://localhost:3000', 
+        'http://localhost:8100',
+        'https://localhost:8100', 
+        'https://api-next-js-bruno-filipe.vercel.app',
+        'https://api-next-js-five.vercel.app',
+        'https://api-next-js-git-main-bruno-filipe.vercel.app'];
+
+        const even = (o) => o === origin;
+
+        if(whiteList.some(even)){
+          
+          console.log("deu certo");
+
+          const d = await verificarTokens(id, token);
+          if (d === true) {
+            res.setHeader("Access-Control-Allow-Origin", origin);
+            res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+            res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, tk, id");
+            res.setHeader("Access-Control-Max-Age", "86400");
+            console.log("acesso liberado")
+            return handler(req, res);
+          } else {
+            res.setHeader("Access-Control-Allow-Origin", origin);
+            res.setHeader("Access-Control-Allow-Methods");
+            res.setHeader("Access-Control-Allow-Headers");
+            res.setHeader("Access-Control-Max-Age", "86400");
+            console.log("invalid id + token")
+            return;
+          } 
+        }
+        else {
+          console.log("invalid origin");
+        }
+      }
+    }       
 }
 
 export default Allow;
