@@ -1,11 +1,10 @@
 import { useState, useEffect} from 'react';
 import Link from 'next/link';
 export default function Produtos(){
-  const domain = 'api-next-js-bruno-filipe.vercel.app';
   const [data, setData] = useState([]);
   
   useEffect(() => {
-    fetch('/api/estados/0', { method: 'GET', headers: { 'id':'4', 'tk':'7cea26600c288a7055229a1d7e9ba49b' } } )
+    fetch('/api/estados/0', { method: 'GET', headers: { 'id':'4', 'tk':'7cea26600c288a7055229a1d7e9ba49b', 'Origin':origin } } )
       .then((res) => res.json())
       .then((data) => {
         setData(data);
