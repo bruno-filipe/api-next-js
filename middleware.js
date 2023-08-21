@@ -35,7 +35,7 @@ const Allow = (handler) => async (req, res) => {
     } else {
       if (req.method === 'OPTIONS') {
         console.log('options');
-        res.setHeader("Access-Control-Allow-Origin", origin);
+        res.setHeader("Access-Control-Allow-Origin", "http://localhost:8100");
         res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
         res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, tk, id, Origin");
         res.setHeader("Access-Control-Max-Age", "86400");
