@@ -9,7 +9,7 @@
       {
         "source": "/(.*)",
         "headers": [
-          { "key": "Access-Control-Allow-Origin", "value": "http://localhost:3000, https://localhost:3000, http://localhost:8100, https://localhost:8100, https://api-next-js-bruno-filipe.vercel.app, https://api-next-js-five.vercel.app, https://api-next-js-git-main-bruno-filipe.vercel.app" },
+          { "key": "Access-Control-Allow-Origin", "value": "*" },
           { "key": "Access-Control-Allow-Methods", "value": "GET, POST, PUT, DELETE, OPTIONS" },
           { "key": "Access-Control-Allow-Headers", "value": "Content-Type, Authorization, tk, id, Origin" },
           { "key": "Access-Control-Max-Age", "value": "86400" }
