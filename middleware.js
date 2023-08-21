@@ -1,3 +1,19 @@
+// Importe o pacote 'cors'
+const cors = require('cors');
+
+// Configure as opções do cors conforme necessário
+const corsOptions = {
+  origin: '*', // Permitir todas as origens (não recomendado para produção)
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // Métodos permitidos
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
+};
+
+// Configure o middleware de tratamento de requisições pre-flight
+module.exports = cors(corsOptions);
+
+
+
 async function verificarTokens(id, token) {
   let f;
   await fetch('http://api-next-js-bruno-filipe.vercel.app/api/usuarios/' + id, {
@@ -26,27 +42,15 @@ const Allow = (handler) => async (req, res) => {
 
     if (id === 'vt') {
       if (token === '7cea26600c288a7055229a1d7e9ba49b') {
-        res.setHeader("Access-Control-Allow-Origin", "http://localhost:8100");
-        res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-        res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, tk, id");
-        res.setHeader("Access-Control-Max-Age", "86400");
         console.log("acesso liberado")
         return handler(req, res);
       } else {
-        res.setHeader("Access-Control-Allow-Origin", "http://localhost:8100");
-        res.setHeader("Access-Control-Allow-Methods");
-        res.setHeader("Access-Control-Allow-Headers");
-        res.setHeader("Access-Control-Max-Age", "86400");
         console.log("invalid token")
         return;
       }
     } else {
       if (req.method === 'OPTIONS') {
         console.log('options');
-        res.setHeader("Access-Control-Allow-Origin", "http://localhost:8100");
-        res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-        res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, tk, id");
-        res.setHeader("Access-Control-Max-Age", "86400");
         console.log(res.header);
         res.status(200).end();
         return;
@@ -54,17 +58,9 @@ const Allow = (handler) => async (req, res) => {
       else{
           const d = await verificarTokens(id, token);
           if (d === true) {
-            res.setHeader("Access-Control-Allow-Origin", "http://localhost:8100");
-            res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-            res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, tk, id");
-            res.setHeader("Access-Control-Max-Age", "86400");
             console.log("acesso liberado")
             return handler(req, res);
           } else {
-            res.setHeader("Access-Control-Allow-Origin", "http://localhost:8100");
-            res.setHeader("Access-Control-Allow-Methods");
-            res.setHeader("Access-Control-Allow-Headers");
-            res.setHeader("Access-Control-Max-Age", "86400");
             console.log("invalid id + token")
             return;
           } 
