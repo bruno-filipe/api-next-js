@@ -23,7 +23,7 @@ const Allow = (handler) => async (req, res) => {
   console.log(token)
   const id = req.headers['id'];
   console.log(id)
-  const origin = req.headers['origin']; // Alterado para req.headers.origin
+  const origin = req.get('Origin');
   console.log(origin)
 
     if (id === 'vt') {
