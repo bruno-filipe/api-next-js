@@ -25,9 +25,7 @@ const Allow = (handler) => async (req, res) => {
   console.log(id)
   
     if (id === 'vt') {
-      const origin = req.headers['Origin'];
-      console.log(origin)
-        if (token === '7cea26600c288a7055229a1d7e9ba49b' && origin === 'https://api-next-js-bruno-filipe.vercel.app') {
+        if (token === '7cea26600c288a7055229a1d7e9ba49b') {
         console.log("acesso liberado")
         return handler(req, res);
       } else {
@@ -45,12 +43,12 @@ const Allow = (handler) => async (req, res) => {
         return;
       }
       else{
-
           const d = await verificarTokens(id, token);
           if (d === true) {
             console.log("acesso liberado")
             return handler(req, res);
           } else {
+            console.log("token incorreto");
             return;
           } 
       }
