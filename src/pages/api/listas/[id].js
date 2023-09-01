@@ -63,7 +63,9 @@ const handler = async (req, res) => {
     //criar registro
     if(req.method === 'POST' && idP == 0){
         const Nome = req.body.Nome;
-        const Cod = req.body.Cod;
+        const Cod = req.body.CodUsuario;
+        console.log(Nome);
+        console.log(Cod);
         const TBLista = await prisma.TBLista.create({
             data: {
                 Nome: Nome,
