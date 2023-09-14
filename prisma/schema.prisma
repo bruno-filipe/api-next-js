@@ -58,6 +58,7 @@ model TBListaProduto {
   CodLista   Int @id
   CodProduto Int
   CodPreco   Int
+  qtd Int
 }
 
 model TBUsuario {
