@@ -35,11 +35,13 @@ const handler = async (req, res) => {
         const CodPt = req.body.CodPt;
         const CodL = req.body.CodL;
         const CodPc = req.body.CodPc;
+        const Qtd = req.body.qtd;
         const TBListaProduto = await prisma.TBListaProduto.create({
             data: {
                 CodLista: CodL,
                 CodProduto: CodPt,
                 CodPreco: CodPc,
+                qtd: Qtd,
             },
         })
         res.status(200).json({ TBListaProduto })
