@@ -55,7 +55,8 @@ model TBLista {
 }
 
 model TBListaProduto {
-  CodLista   Int @id
+  id Int @id @default(autoincrement())
+  CodLista   Int 
   CodProduto Int
   CodPreco   Int
   qtd Int

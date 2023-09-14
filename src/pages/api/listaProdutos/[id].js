@@ -23,7 +23,7 @@ const handler = async (req, res) => {
         else if(idP > 0){
             const ListaProduto = await prisma.TBListaProduto.findUnique({
                 where: {
-                    CodLista: idP,
+                    id: idP,
                 },
             })
             res.status(200).json({ ListaProduto });
@@ -53,7 +53,7 @@ if(req.method === 'PUT'){
     //pegando os dados atuais, por precaução:
     const LP = await prisma.TBListaProduto.findUnique({
         where: {
-          CodLista: idP,
+          id: idP,
         },
       })
     //caso o usuário não insira valores no formulário,
@@ -66,7 +66,7 @@ if(req.method === 'PUT'){
 
     const updateLP = await prisma.TBListaProduto.update({
         where: {
-            CodLista: idP,
+            id: idP,
         },
         data: {
             qtd: Qtd,
@@ -79,7 +79,7 @@ if(req.method === 'PUT'){
     if(req.method === 'DELETE'){
         const deleteProduto = await prisma.TBListaProduto.delete({
             where: {
-              CodLista: idP,
+              id: idP,
             },
         })
         res.status(200).json({ data: deleteProduto.CodLista })
