@@ -30,6 +30,7 @@ const handler = async (req, res) => {
         }
     }
 
+    //como assim?
     //criar registro
     if(req.method === 'POST' && idP == 0){
         const CodPt = req.body.CodPt;
