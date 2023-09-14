@@ -45,8 +45,36 @@ const handler = async (req, res) => {
         res.status(200).json({ TBListaProduto })
     }
 
+//atuaizar registro
+if(req.method === 'PUT'){
+    
+    //pegando os dados atuais, por precaução:
+    const LP = await prisma.TBListaProduto.findUnique({
+        where: {
+          CodLista: idP,
+        },
+      })
+    //caso o usuário não insira valores no formulário,
+    //a API deve deixar os valores atuais do produto.
+
+    let Qtd = req.body.qtd;
+    if(isNullOrEmpty(qtd)){
+      Qtd = LP.qtd;
+    }
+
+    const updateLP = await prisma.TBListaProduto.update({
+        where: {
+            CodLista: idP,
+        },
+        data: {
+            qtd: Qtd,
+        },
+    })
+    res.status(200).json({ data: updateLP })
+}
+
     //apagar registro 
-    if(req.method === 'DELETE' && idP != 0){
+    if(req.method === 'DELETE'){
         const deleteProduto = await prisma.TBListaProduto.delete({
             where: {
               CodLista: idP,
