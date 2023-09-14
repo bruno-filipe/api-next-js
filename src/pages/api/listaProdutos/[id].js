@@ -60,7 +60,7 @@ if(req.method === 'PUT'){
     //a API deve deixar os valores atuais do produto.
 
     let Qtd = req.body.qtd;
-    if(isNullOrEmpty(qtd)){
+    if(isNullOrEmpty(Qtd)){
       Qtd = LP.qtd;
     }
 
