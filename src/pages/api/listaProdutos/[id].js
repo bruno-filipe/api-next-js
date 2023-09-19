@@ -30,7 +30,6 @@ const handler = async (req, res) => {
         }
     }
 
-    //como assim?
     //criar registro
     if(req.method === 'POST' && idP == 0){
         const CodPt = req.body.CodPt;
@@ -60,6 +59,7 @@ if(req.method === 'PUT'){
     //caso o usuário não insira valores no formulário,
     //a API deve deixar os valores atuais do produto.
 
+    /*eslint-disable prefer-const*/
     let Qtd = req.body.qtd;
     if(isNullOrEmpty(Qtd)){
       Qtd = LP.qtd;

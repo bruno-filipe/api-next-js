@@ -54,14 +54,6 @@ model TBLista {
   Nome       String @db.VarChar(256)
 }
 
-model TBListaProduto {
-  id Int @id @default(autoincrement())
-  CodLista   Int 
-  CodProduto Int
-  CodPreco   Int
-  qtd Int
-}
-
 model TBUsuario {
   IDUsuario Int     @id @default(autoincrement())
   Nome      String? @db.VarChar(256)
@@ -75,4 +67,12 @@ model c69_a2ba_5778_bbc0_420c6361c0e6_20230601131430_vrepl {
   CodUsuario Int
 
   @@map("_39646c69_a2ba_5778_bbc0_420c6361c0e6_20230601131430_vrepl")
+}
+
+model TBListaProduto {
+  id         Int @id @default(autoincrement())
+  CodLista   Int
+  CodProduto Int
+  CodPreco   Int
+  qtd        Int
 }
