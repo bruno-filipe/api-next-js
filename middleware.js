@@ -1,20 +1,17 @@
 async function verificarTokens(id, token) {
-  let f;
+  let f, Usuarios;
   await fetch('http://api-next-js-bruno-filipe.vercel.app/api/usuarios/' + id, {
     method: 'GET',
     headers: { 'id': 'vt', 'tk': '7cea26600c288a7055229a1d7e9ba49b' }
   })
     .then(response => response.json())
     .then(data => {
-      if (data.Usuario.apiKey.trim() === token.trim()) {
-        f = true;
-      } else {
-        f = false;
-      }
+      Usuarios = data;
     })
     .catch(error => {
-      console.error('Erro na requisição:', error);
+      console.error(error);
     });
+    console.log(Usuarios);
   return f;
 }
 
