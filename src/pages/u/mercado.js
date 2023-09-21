@@ -6,7 +6,7 @@ export default function Update(){
   const [data2, setData2] = useState([]);
     
   useEffect(() => {
-      fetch('/api/cidades/0', { method: 'GET', headers: {'id':'4', 'tk':'7cea26600c288a7055229a1d7e9ba49b'}})
+      fetch('/api/cidades/0', { method: 'GET', headers: {'id':'1', 'tk':'7cea26600c288a7055229a1d7e9ba49b'}})
       .then((res) => res.json())
       .then((data2) => {
           setData2(data2);
@@ -28,7 +28,7 @@ export default function Update(){
     const form = e.target;
     const obj = {CodCidade: Cod, NomeMercado: Nome};
     const formJson = JSON.stringify(obj);
-    fetch('/api/mercados/'+idP, { headers: {'Content-Type': 'application/json', 'id':'4', 'tk':'7cea26600c288a7055229a1d7e9ba49b'}, method: 'PUT', body: formJson })
+    fetch('/api/mercados/'+idP, { headers: {'Content-Type': 'application/json', 'id':'1', 'tk':'7cea26600c288a7055229a1d7e9ba49b'}, method: 'PUT', body: formJson })
     .then((response) => {
       if(response.ok){
         alert('Mercado atualizado');

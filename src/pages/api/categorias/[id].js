@@ -35,9 +35,11 @@ const handler = async (req, res) => {
   //criar registro
   if(req.method === 'POST' && idP == 0){
     const Nome = req.body.NomeCategoria;
+    const Desc = req.body.Descricao;
     const TBCategoria = await prisma.TBCategoria.create({
       data: {
         NomeCategoria: Nome,
+        Descricao: Desc,
       },
     })
     res.status(200).json({ TBCategoria })
@@ -60,6 +62,10 @@ const handler = async (req, res) => {
     if(isNullOrEmpty(Nome)){
       Nome = produto.NomeCategoria
     }
+    let Desc = req.body.NomeCategoria;
+    if(isNullOrEmpty(Desc)){
+      Desc = produto.Descricao
+    }
 
     const updateCategoria = await prisma.TBCategoria.update({
       where: {
@@ -67,6 +73,7 @@ const handler = async (req, res) => {
       },
       data: {
         NomeCategoria: Nome,
+        Descricao: Desc, 
       },
   })
   res.status(200).json({ data: updateCategoria })

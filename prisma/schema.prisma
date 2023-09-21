@@ -30,7 +30,7 @@ model TBProduto {
   NomeProduto      String @db.VarChar(255)
   DescricaoProduto String @db.VarChar(255)
   Medida           String @db.VarChar(70)
-  FotoProduto      String @db.VarChar(255)
+  FotoProduto      Bytes
   MarcaProduto     String @db.VarChar(70)
   CodCategoria     Int
 }
@@ -44,8 +44,9 @@ model TBPrecos {
 }
 
 model TBCategoria {
-  IDCategoria   Int    @id @default(autoincrement())
-  NomeCategoria String @db.VarChar(255)
+  IDCategoria   Int     @id @default(autoincrement())
+  NomeCategoria String  @db.VarChar(255)
+  Descricao     String? @db.VarChar(255)
 }
 
 model TBLista {
@@ -75,4 +76,23 @@ model TBListaProduto {
   CodProduto Int
   CodPreco   Int
   qtd        Int
+}
+
+model a669268_0264_5eb0_b9e3_1767a29fafcf_20230921183523_vrepl {
+  IDCategoria   Int    @id @default(autoincrement())
+  NomeCategoria String @db.VarChar(255)
+
+  @@map("_1a669268_0264_5eb0_b9e3_1767a29fafcf_20230921183523_vrepl")
+}
+
+model bb8559_56dd_5764_8ea9_3fa371393e94_20230921183528_vrepl {
+  IDProduto        Int    @id @default(autoincrement())
+  NomeProduto      String @db.VarChar(255)
+  DescricaoProduto String @db.VarChar(255)
+  Medida           String @db.VarChar(70)
+  FotoProduto      String @db.VarChar(255)
+  MarcaProduto     String @db.VarChar(70)
+  CodCategoria     Int
+
+  @@map("_81bb8559_56dd_5764_8ea9_3fa371393e94_20230921183528_vrepl")
 }

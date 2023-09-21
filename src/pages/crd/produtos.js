@@ -8,7 +8,7 @@ export default function Produtos(){
   
   useEffect(() => {
     setLoading(true);
-    fetch('/api/produtos/0', { headers: {'id':'4', 'tk':'7cea26600c288a7055229a1d7e9ba49b'}, method: 'GET'})
+    fetch('/api/produtos/0', { headers: {'id':'1', 'tk':'7cea26600c288a7055229a1d7e9ba49b'}, method: 'GET'})
       .then((res) => res.json())
       .then((data) => {
         setData(data);
@@ -22,7 +22,7 @@ export default function Produtos(){
   const [data2, setData2] = useState([]);
  
   useEffect(() => {
-    fetch('/api/categorias/0', { headers: {'id':'4', 'tk':'7cea26600c288a7055229a1d7e9ba49b'}, method: 'GET'})
+    fetch('/api/categorias/0', { headers: {'id':'1', 'tk':'7cea26600c288a7055229a1d7e9ba49b'}, method: 'GET'})
       .then((res) => res.json())
       .then((data2) => {
         setData2(data2);
@@ -42,7 +42,7 @@ export default function Produtos(){
     const form = e.target;
     const obj = {NomeProduto: Nome, DescricaoProduto: Desc, Medida: Medida, MarcaProduto: Marca, Categoria: select};
     const formJson = JSON.stringify(obj);
-    fetch('/api/produtos/0', { headers: {'Content-Type': 'application/json', 'id':'4', 'tk':'7cea26600c288a7055229a1d7e9ba49b'}, method: form.method, body: formJson })
+    fetch('/api/produtos/0', { headers: {'Content-Type': 'application/json', 'id':'1', 'tk':'7cea26600c288a7055229a1d7e9ba49b'}, method: form.method, body: formJson })
     .then((response) => {
       if(response.ok){
         alert('Produto adicionado');
@@ -56,7 +56,7 @@ export default function Produtos(){
 
   const apagar = async idP =>{
     if (confirm("Deseja apagar o produto "+idP+" ?") == true) {
-      const response = await fetch(`/api/produtos/${idP}`, { headers: {'id':'4', 'tk':'7cea26600c288a7055229a1d7e9ba49b'}, method: 'DELETE'});
+      const response = await fetch(`/api/produtos/${idP}`, { headers: {'id':'1', 'tk':'7cea26600c288a7055229a1d7e9ba49b'}, method: 'DELETE'});
       const data = await response.json();
       alert(`Produto com ID: ${data.data} excluído com sucesso!`);
       location.reload();
@@ -104,13 +104,15 @@ export default function Produtos(){
       <div>
       <label for="MarcaProduto">Marca: </label>
       <input type="text" name="MarcaProduto" id="MarcaProduto" placeholder="Stela D'Oro" required/>
+      <label for="FotoProduto">Foto: </label>
+      <input type="file" name="FotoProduto" id="FotoProduto" required/>
       </div>
       <div>
         <label for="Categoria">Categoria: </label>
         <select id="Categoria" required>
           <option value={""}>Selecionar</option>
           {Categorias?.map(categoria =>
-            <option key={categoria.IDCategoria} value={categoria.IDCategoria}>{categoria.NomeCategoria}</option>  
+            <option key={categoria.IDCategoria} value={categoria.IDCategoria}>{categoria.NomeCategoria} <sub>{categoria.Descricao}</sub></option>  
           )}
         </select>
       </div>

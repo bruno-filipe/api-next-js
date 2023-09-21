@@ -4,7 +4,7 @@ export default function Produtos(){
   const [data, setData] = useState([]);
   
   useEffect(() => {
-    fetch('/api/estados/0', { method: 'GET', headers: { 'id':'4', 'tk':'7cea26600c288a7055229a1d7e9ba49b', 'Origin':origin } } )
+    fetch('/api/estados/0', { method: 'GET', headers: { 'id':'1', 'tk':'7cea26600c288a7055229a1d7e9ba49b', 'Origin':origin } } )
       .then((res) => res.json())
       .then((data) => {
         setData(data);
@@ -20,7 +20,7 @@ export default function Produtos(){
     const form = e.target;
     const obj = {IDUF: ID, NomeEstado: Nome};
     const formJson = JSON.stringify(obj);
-    fetch('/api/estados/0', { headers: {'Content-Type': 'application/json', 'id':'4', 'tk':'7cea26600c288a7055229a1d7e9ba49b' }, method: form.method, body: formJson })
+    fetch('/api/estados/0', { headers: {'Content-Type': 'application/json', 'id':'1', 'tk':'7cea26600c288a7055229a1d7e9ba49b' }, method: form.method, body: formJson })
     .then((response) => {
       if(response.ok){
         alert('Estado adicionado');
@@ -34,7 +34,7 @@ export default function Produtos(){
 
   const apagar = async idP =>{
     if (confirm("Deseja apagar o estado "+idP+" ?") == true) {
-      const response = await fetch(`/api/estados/${idP}`, { method: 'DELETE', headers: {'id':'4', 'tk':'7cea26600c288a7055229a1d7e9ba49b'} });
+      const response = await fetch(`/api/estados/${idP}`, { method: 'DELETE', headers: {'id':'1', 'tk':'7cea26600c288a7055229a1d7e9ba49b'} });
       const data = await response.json();
       alert(`Estado com IDUF: ${data.data} excluído com sucesso!`);
       location.reload();
