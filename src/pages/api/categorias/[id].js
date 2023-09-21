@@ -62,7 +62,7 @@ const handler = async (req, res) => {
     if(isNullOrEmpty(Nome)){
       Nome = produto.NomeCategoria
     }
-    let Desc = req.body.NomeCategoria;
+    let Desc = req.body.Descricao;
     if(isNullOrEmpty(Desc)){
       Desc = produto.Descricao
     }
