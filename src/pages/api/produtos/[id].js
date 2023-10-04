@@ -77,50 +77,41 @@ const handler = async (req, res) => {
         IDProduto: idP,
       },
     })
-    //caso o usuário não insira valores no formulário,
-    //a API deve deixar os valores atuais do produto.
 
-    let Nome = req.body.NomeProduto;
-    if(isNullOrEmpty(Nome)){
-      Nome = produto.NomeProduto
-    }
+    const web = "------WebKitFormBoundary";
+    const edit = req.body;
+    const keys = ["NomeProduto", "DescricaoProduto", "Medida", "MarcaProduto", "FotoProduto", "Categoria"];
+    let values = [];
+    let l = 0;
+    
 
-    let Desc = req.body.DescricaoProduto;
-    if(isNullOrEmpty(Desc)){
-      Desc = produto.DescricaoProduto;
+    for(let i = 0; i < keys.length ; i++){
+      let m = edit.indexOf(keys[i], l);
+      m += keys[i].length + 1;
+      l = req.body.indexOf(web, m);
+      values[i] = edit.substring(m, l).trim();
     }
-  
-    let Med = req.body.Medida;
-    if(isNullOrEmpty(Med)){
-      Med = produto.Medida;
+    const validBase64 = values[4].replace(/[^a-zA-Z0-9+/=]/g, "");
+    const decodedBase64 = atob(validBase64);
+    const data = new Uint8Array(decodedBase64.length);
+    for (let i = 0; i < decodedBase64.length; i++) {
+      data[i] = decodedBase64.charCodeAt(i);
     }
-
-    let Marca = req.body.MarcaProduto;
-    if(isNullOrEmpty(Marca)){
-      Marca = produto.marcaProduto;
-    }
-
-    let cat = parseInt(req.body.Categoria);
-    if(isNullOrEmpty(cat)){
-      cat = produto.CodCategoria;
-    }
-
-    const Foto = req.body.FotoProduto;
 
     const updateProduto = await prisma.TBProduto.update({
       where: {
           IDProduto: idP,
       },
       data: {
-        NomeProduto: Nome,
-        DescricaoProduto: Desc,
-        Medida: Med,
-        FotoProduto: Foto,
-        MarcaProduto: Marca,
-        CodCategoria: cat,
+        NomeProduto: values[0],
+        DescricaoProduto: values[1],
+        Medida: values[2],
+        MarcaProduto: values[3],
+        FotoProduto: Buffer.from(data),
+        CodCategoria: parseInt(values[5]),
       },
-  })
-  res.status(200).json({ data: updateProduto })
+    })
+    res.status(200).json({ data: updateProduto })
   }
 
 

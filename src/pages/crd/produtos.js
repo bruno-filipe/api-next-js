@@ -42,6 +42,14 @@ export default function Produtos(){
  
   var Categorias = data2.TBCategoria;
 
+  function reader(file, callback) {
+    const fr = new FileReader();
+    fr.onload = () => callback(null, fr.result);
+    fr.onerror = (err) => callback(err);
+    fr.readAsDataURL(file);
+  }
+  
+
   async function criar(e){
     e.preventDefault();
     const form = e.target;
@@ -71,6 +79,9 @@ export default function Produtos(){
       location.reload();
     }
   }
+  if(Produtos){
+    console.log(Produtos);
+  }
   return <>
     <div id='ccrd'>
       <Link href={{pathname: '../'}}>⬅</Link>
@@ -80,7 +91,7 @@ export default function Produtos(){
         <ul>{
           Produtos?.map(produto =>
               <li key={produto.IDProduto}>
-                <img src={img(produto.FotoProduto)} alt='Foto Produto' className='imgP'></img>                
+                <img src={img(produto.FotoProduto)} alt='Foto Produto'></img>                
                 <div className='texto'>
                   <h2>
                     <b>{produto.NomeProduto}</b>{' ' + produto.MarcaProduto}

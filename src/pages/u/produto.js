@@ -22,25 +22,30 @@ export default function Update(){
   
   const idP = data.IDProduto;
 
+  function reader(file, callback) {
+    const fr = new FileReader();
+    fr.onload = () => callback(null, fr.result);
+    fr.onerror = (err) => callback(err);
+    fr.readAsDataURL(file);
+  }
+  
   function atualizar(e){
     e.preventDefault();
-    const select = document.getElementById("Categoria").value;
-    const Nome = document.getElementById("NomeProduto").value;
-    const Desc = document.getElementById("DescricaoProduto").value;
-    const Medida = document.getElementById("Medida").value;
-    const Marca = document.getElementById("MarcaProduto").value;
-
-    const obj = {NomeProduto: Nome, DescricaoProduto: Desc, Medida: Medida, MarcaProduto: Marca, Categoria: select};
-    const formJson = JSON.stringify(obj);
-    fetch(`/api/produtos/${idP}`, { headers: { 'Content-Type': 'application/json', 'id':'1', 'tk':'7cea26600c288a7055229a1d7e9ba49b'}, method: 'PUT', body: formJson })
-    .then((response) => {
-      if(response.ok){
-        alert('Produto atualizado');
-        window.location.href="../crd/produtos";
-      }
-      else{
-        alert('Falha ao atualizar o produto :/')
-      }
+    const form = e.target;
+    const formData = new FormData(form);
+    
+    reader(formData.get("FotoProduto"), (err, res) => {
+      formData.set("FotoProduto", res);
+      fetch('/api/produtos/'+idP, { headers: {'Content-Type': 'multipart/form-data', 'id':'1', 'tk':'7cea26600c288a7055229a1d7e9ba49b'}, method: "PUT", body: formData})
+      .then((response) => {
+        if(response.ok){
+          alert('Produto adicionado');
+          history.back();
+        }
+        else{
+          alert('Falha ao adicionar o novo produto :/');
+        }
+      });  
     });
   }
 
@@ -67,11 +72,15 @@ export default function Update(){
       <input type="text" name="MarcaProduto" id="MarcaProduto" placeholder={data.MarcaProduto} required/>
       </div>
       <div>
+        <label for="FotoProduto">Foto: </label>
+        <input type='file' name='FotoProduto' id='FotoProduto'></input>
+      </div>
+      <div>
         <label for="Categoria">Categoria: </label>
-        <select id="Categoria" required>
+        <select id="Categoria" name="Categoria" required>
           <option value={""}>Selecionar</option>
           {Categorias?.map(categoria =>
-            <option key={categoria.IDCategoria} value={categoria.IDCategoria}>{categoria.NomeCategoria}</option>  
+            <option key={categoria.IDCategoria} value={categoria.IDCategoria}>{categoria.NomeCategoria} ({categoria.Descricao})</option>  
           )}
         </select>
       </div>
