@@ -1,7 +1,11 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import {encode, decode} from 'uint8-to-base64';
+
 
 export default function Produtos(){
+  const {encode, decode} = require('uint8-to-base64');
+  
   const [data, setData] = useState([]);
  
   useEffect(() => {
@@ -13,6 +17,16 @@ export default function Produtos(){
   }, []);
  
   var Produtos = data.TBProduto;
+  
+  function img(buf){
+    const uint = new Uint8Array(buf.data.length);
+    for(let i = 0; i < buf.data.length; i++){
+      uint[i] = buf.data.at(i);
+    }
+    let encoded = encode(uint);
+    encoded = encoded.replace("dataimage/jpegbase64", "data:image/jpeg;base64,");
+    return encoded;
+  }
 
   return <>
     <div id='ccrd'>
@@ -23,7 +37,7 @@ export default function Produtos(){
         <ul>{
           Produtos?.map(produto =>
               <li key={produto.IDProduto}>
-                <img className='imagem' src={produto.FotoProduto} alt='Foto do Produto'></img>
+                <img src={img(produto.FotoProduto)} className='imagem' alt='Foto do Produto'></img>
                 <div className='texto'>
                   <h2>
                     <b>{produto.NomeProduto}</b>{' ' + produto.MarcaProduto}

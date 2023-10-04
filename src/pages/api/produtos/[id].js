@@ -1,5 +1,6 @@
+import { json } from 'express';
 import Allow from '../../../../middleware';
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 //função que verifica se o valor é válido
@@ -31,25 +32,39 @@ const handler = async (req, res) => {
   }
 
 
-
   //criar registro
   if(req.method === 'POST' && idP == 0){
-    const Nome = req.body.NomeProduto;    
-    const Desc = req.body.DescricaoProduto;
-    const Med = req.body.Medida;
-    const Marca = req.body.MarcaProduto;
-    const cat = parseInt(req.body.Categoria);
+    const web = "------WebKitFormBoundary";
+    const edit = req.body;
+    const keys = ["NomeProduto", "DescricaoProduto", "Medida", "MarcaProduto", "FotoProduto", "Categoria"];
+    let values = [];
+    let l = 0;
+    
+    for(let i = 0; i < keys.length ; i++){
+      let m = edit.indexOf(keys[i], l);
+      m += keys[i].length + 1;
+      l = req.body.indexOf(web, m);
+      values[i] = edit.substring(m, l).trim();
+    }
+    const validBase64 = values[4].replace(/[^a-zA-Z0-9+/=]/g, "");
+    const decodedBase64 = atob(validBase64);
+    const data = new Uint8Array(decodedBase64.length);
+    for (let i = 0; i < decodedBase64.length; i++) {
+      data[i] = decodedBase64.charCodeAt(i);
+    }
+
+
     const TBProduto = await prisma.TBProduto.create({
       data: {
-        NomeProduto: Nome,
-        DescricaoProduto: Desc,
-        Medida: Med,
-        FotoProduto: "",
-        MarcaProduto: Marca,
-        CodCategoria: cat,
+        NomeProduto: values[0],
+        DescricaoProduto: values[1],
+        Medida: values[2],
+        MarcaProduto: values[3],
+        FotoProduto: Buffer.from(data),
+        CodCategoria: parseInt(values[5]),
       },
     })
-    res.status(200).json({ TBProduto })
+    res.status(200).json({ data: TBProduto.NomeProduto })
   }
 
 
@@ -90,6 +105,8 @@ const handler = async (req, res) => {
       cat = produto.CodCategoria;
     }
 
+    const Foto = req.body.FotoProduto;
+
     const updateProduto = await prisma.TBProduto.update({
       where: {
           IDProduto: idP,
@@ -98,7 +115,7 @@ const handler = async (req, res) => {
         NomeProduto: Nome,
         DescricaoProduto: Desc,
         Medida: Med,
-        FotoProduto: "",
+        FotoProduto: Foto,
         MarcaProduto: Marca,
         CodCategoria: cat,
       },
