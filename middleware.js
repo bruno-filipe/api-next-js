@@ -19,6 +19,7 @@ async function verificarTokens(id, token) {
 }
 
 const Allow = (handler) => async (req, res) => {
+  console.log(req.headers);
   const token = req.headers['tk'];
   console.log(token)
   const id = req.headers['id'];
@@ -47,7 +48,7 @@ const Allow = (handler) => async (req, res) => {
       else{
           const d = await verificarTokens(id, token);
           if (d === true) {
-            console.log("acesso liberado")
+            console.log("acesso liberado");
             return handler(req, res);
           }
       }
