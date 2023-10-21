@@ -23,7 +23,7 @@ const handler = async (req, res) => {
         else if(idP > 0){
             const ListaProduto = await prisma.TBListaProduto.findUnique({
                 where: {
-                    id: idP,
+                    CodLista: idP,
                 },
             })
             res.status(200).json({ ListaProduto });
