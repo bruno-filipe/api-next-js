@@ -19,11 +19,10 @@ async function verificarTokens(id, token) {
 }
 
 const Allow = (handler) => async (req, res) => {
-  console.log(req.headers);
   const token = req.headers['tk'];
-  console.log(token)
+//  console.log(token)
   const id = req.headers['id'];
-  console.log(id)
+//  console.log(id)
 
     if (req.method === 'OPTIONS') {
       console.log('options');
@@ -33,22 +32,22 @@ const Allow = (handler) => async (req, res) => {
 
     if (id === 'vt') {
       if (token === '7cea26600c288a7055229a1d7e9ba49b') {
-        console.log("acesso liberado")
+//        console.log("acesso liberado")
         return handler(req, res);
       } else {
-        console.log("credenciais inválidas")
+//        console.log("credenciais inválidas")
         return;
       }
     } else {
       if (req.method === 'OPTIONS') {
-        console.log('options');
+//        console.log('options');
         res.status(200).end();
         return;
       }
       else{
           const d = await verificarTokens(id, token);
           if (d === true) {
-            console.log("acesso liberado");
+//            console.log("acesso liberado");
             return handler(req, res);
           }
       }

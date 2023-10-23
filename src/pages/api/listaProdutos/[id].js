@@ -21,7 +21,7 @@ const handler = async (req, res) => {
             res.status(200).json({ TBListaProduto })
         }
         else if(idP > 0){
-            const ListaProduto = await prisma.TBListaProduto.findUnique({
+            const ListaProduto = await prisma.TBListaProduto.findMany({
                 where: {
                     CodLista: idP,
                 },
@@ -64,13 +64,28 @@ if(req.method === 'PUT'){
     if(isNullOrEmpty(Qtd)){
       Qtd = LP.qtd;
     }
-
+    let CodLista = req.body.CodL;
+    if(isNullOrEmpty(CodLista)){
+      CodLista = LP.CodLista;
+    }
+    let CodProduto = req.body.CodPt;
+    if(isNullOrEmpty(CodProduto)){
+      CodProduto = LP.CodProduto;
+    }
+    let CodPreco = req.body.CodPc;
+    if(isNullOrEmpty(CodPreco)){
+      CodPreco = LP.CodPreco;
+    }
+    
     const updateLP = await prisma.TBListaProduto.update({
         where: {
             id: idP,
         },
         data: {
             qtd: Qtd,
+            CodLista: CodLista,
+            CodProduto: CodProduto,
+            CodPreco: CodPreco,
         },
     })
     res.status(200).json({ data: updateLP })
