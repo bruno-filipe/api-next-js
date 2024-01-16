@@ -155,7 +155,7 @@ div#ccrd>h1{
 div#links{
   width: 96%;
   padding: 2vw;
-  background-color: rgb(18, 18, 18);
+  background-color: rgba(18, 18, 18, 0.3);
   border-radius: 2vw;
   text-align: center;
   font-size: xx-large;
@@ -167,7 +167,7 @@ div#links>a{
   margin: 1vw;
   padding: 1vw;
   border-radius: 1vw;
-  background-color: rgb(36, 36, 36);
+  background-color: rgba(36, 36, 36, 0.3);
 }
 
 h1{
@@ -178,7 +178,7 @@ h1{
 
 ul{
   margin: 2vw 0vw 2vw 0vw;
-  background-color: rgb(18, 18, 18);
+  background-color: rgba(18, 18, 18, 0.3);
   padding: 1vw 1vw 1vw 1vw;
   border-radius: 1vw;
 }
@@ -217,7 +217,7 @@ div.ud>button, div.pUD>button{
   margin: 0vw 1vw 0vw 1vw;
   padding: 10px 0px;
   background-color: rgb(255, 46, 46);
-  border: 0px solid rgba(0, 0, 0, 0);
+  border: 0;
   border-radius: 2px;
   color: black;
   font-family: 'Times New Roman', Times, serif;
@@ -230,7 +230,7 @@ li.item{
   width: 96%;
   margin: 0vw auto 0vw auto;
   border-radius: 2vw;
-  background-color: black;
+  background-color: rgba(18, 18, 18, 0.3);
 }
 div.linha{
   display:flex;
@@ -275,7 +275,7 @@ div.nMercado{
 }
 
 form{
-  background-color: rgb(18, 18, 18);
+  background-color: rgba(18, 18, 18, 0.3);
   padding: 1vw 1vw 1vw 1vw;
   margin-bottom: 10vw;
   border-radius: 1vw;
